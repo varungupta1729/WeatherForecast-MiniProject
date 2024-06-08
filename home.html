@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App -by Varun Gupta</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="box">
+        <div class="wave -one"></div>
+        <div class="wave -two"></div>
+        <div class="wave -three"></div>
+        <div id="weathericon">
+            <i class="fa-solid fa-sun" style="color: #eccc68;"></i>
+           
+        </div>
+        <div class="info">
+            <h2 class="location"><i class="fa-solid fa-street-view"></i> {%location%},{%country%}</h2>
+            <p id="date"> WED | SEPT 23 | 10:49PM</p>
+            <h1 class="temp">{%tempval%}</h1>
+            <h3 class="tempmin_max">Min {%tempmin%} | Max {%tempmax%}</h3>
+        </div>
+    </div>
+    <script>
+        const   curDate = document.getElementById("date");
+        const weathericon = document.getElementById("weathericon");
+
+        
+
+        const tempStatus = "{%tempstatus%}";
+        if(tempStatus=="Sunny"){
+          weathericon.innerHTML= " <i class='fa-solid fa-sun' style='color: #eccc68;''></i>"
+        }
+        const getCurrentDay = () =>{
+          let currentTime  = new Date();
+          let currentDay = currentTime.getDay();
+          let day =[]
+             day[1] = "MON"
+             day[2] = "TUE"
+             day[3] = "WED"
+             day[4] = "THU"
+             day[5] = "FRI"
+             day[6] = "SAT"
+             day[0] = "SUN"
+          console.log(day[currentDay]);
+
+          let month = currentTime.getMonth();
+          let months =[];
+          months[0]="JAN"
+          months[1]="FEB"
+          months[2]="MAR"
+          months[3]="APR"
+          months[4]="MAY"
+          months[5]="JUN"
+          months[6]="JULY"
+          months[7]="AUG"
+          months[8]="SEPT"
+          months[9]="OCT"
+          months[10]="NOV"
+          months[11]="DEC"
+          let date  = currentTime.getDate();
+          let hour = currentTime.getHours();
+          let minutes = currentTime.getMinutes(); 
+        //   console.log(currentMonth);
+          console.log(months[month]);
+          console.log(date);
+          let period;
+          if(hour>=12){
+            period = 'PM'
+          }
+          else(
+            period = 'AM'
+          )
+          let time = `${hour <= 9 ? "0" + hour : hour }:${minutes <= 9 ? "0" + minutes : minutes} ${period}`
+                 console.log(time);
+
+                 return `${day[currentDay]} | ${months[month]} ${date} | ${time}`
+        }
+        
+       let properTime =  getCurrentDay();
+       console.log(properTime);
+       curDate.textContent = `${properTime}`
+    </script>
+</body>
+</html>
